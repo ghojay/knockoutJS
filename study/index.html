@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- 
+
+    引用KnockoutJS 
+    创建视图模型（ｊｓ对象）
+    创建视图
+    激活KnockoutJS
+
+ -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnockoutJS</title>
+    <script src="https://cdn.bootcss.com/knockout/3.5.1/knockout-latest.debug.min.js"></script>
+    <style>
+        .myclass {
+            font-size: 50px;
+        }
+        
+        .myclass1 {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" data-bind="value: name, valueUpdate:'afterkeydown'"> The name is <span data-bind="text: name"></span> The age is <span data-bind="text: age"></span>
+        <p data-bind="text: fav()[0], css:{myclass:mycss}, style:{color:mycolor, backgroundColor:'blue'}"></p>
+        <input type="checkbox" data-bind="checked: mycheck, "><span data-bind="text: mycheck,css:{myclass1:mycheck}"></span>
+        <select data-bind="options:userlist, value:myuser"></select>
+        <p data-bind="text:myuser"></p>
+    </div>
+
+    <script>
+        // 定义视图模型　　ｊｓ对象模型
+        var vm = {
+                name: ko.observable("张三"),
+                gender: "male",
+                age: 23,
+                fav: ko.observableArray(["1", "2"]),
+                mycheck: ko.observable(true),
+                userlist: ko.observableArray(["football", "foot", "music"]),
+                myuser: ko.observable("music"),
+                mycolor: "red",
+                mycss: true
+            }
+            // vm.name= "lisi";
+            // 正确的赋值
+        vm.name("lisi");
+        vm.fav.push("push");
+        console.log(vm.fav());
+        vm.fav.pop();
+        console.log(vm.fav());
+        vm.fav.reverse();
+        console.log(vm.fav());
+
+
+        console.log(vm.name());
+        ko.applyBindings(vm); //!!!!!
+    </script>
+
+</body>
+
+</html>
